@@ -71,6 +71,10 @@ def divisors(number):
             divisors.append(number/i)
     return divisors
 
+def is_palindrome(candidate):
+    """Determine whether or not a number (or any string) is palindromic"""
+    digits = [digit for digit in str(candidate)]
+    return (digits == digits[::-1])
 
 def is_pandigital(candidate):
     """Determine whether or not a number with n digits contains all the
