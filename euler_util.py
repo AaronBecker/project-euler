@@ -76,6 +76,7 @@ def divisors(number):
 def is_pandigital(candidate):
     """Determine whether or not a number with n digits contains all the
     digits from 1 to n"""
+    if candidate > 987654321: return False
     digits = [digit for digit in str(candidate)]
     for i in range(1, len(digits)+1):
         if not str(i) in digits: return False
