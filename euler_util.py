@@ -46,13 +46,14 @@ def sieve_of_eratosthenes(n):
                 sieve[j] = 0
     # Filter out the composites, which have been replaced by 0's
     return [p for p in sieve if p]
+sieve = sieve_of_eratosthenes
 
 def factor(number):
     factors = [1]
     sqrt = int(number ** 0.5) + 1
     primes = sieve_of_eratosthenes(sqrt)
     index = 0 
-    while primes[index] <= sqrt:
+    while index < len(primes) and primes[index] <= sqrt:
         prime = primes[index]
         while number % prime == 0:
             number /= prime
