@@ -10,6 +10,8 @@ def euler50(upper_bound=1000000):
     primes_set = set(primes)
     current_candidate = 1
     current_candidate_length = 1
+    # note: the sum of the first 1000 primes is well over 10^6, so don't try
+    # longer sequences
     for start in range(len(primes)):
         for end in range(start + current_candidate_length, min(len(primes), start+1000)):
             prime_slice = primes[start:end+1]
