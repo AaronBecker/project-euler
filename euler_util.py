@@ -49,6 +49,7 @@ def sieve_of_eratosthenes(n):
 sieve = sieve_of_eratosthenes
 
 def factor(number):
+    """ Return a list of prime factors of n"""
     factors = [1]
     sqrt = int(number ** 0.5) + 1
     primes = sieve_of_eratosthenes(sqrt)
@@ -61,6 +62,16 @@ def factor(number):
         index += 1
     factors.append(number)
     return factors
+
+def divisors(number):
+    """Return a list of proper divisors of n"""
+    divisors = [1]
+    for i in range(2, int(number ** 0.5) + 1):
+        if number % i == 0:
+            divisors.append(i)
+            divisors.append(number/i)
+    return divisors
+
 
 def is_pandigital(candidate):
     """Determine whether or not a number with n digits contains all the
