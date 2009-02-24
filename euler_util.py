@@ -81,3 +81,14 @@ def is_pandigital(candidate):
         if not str(i) in digits: return False
     return True
 
+# permutations generator from Michael Davies
+# http://code.activestate.com/recipes/252178/
+def permutations(str):
+    if len(str) <=1:
+        yield str
+    else:
+        for perm in permutations(str[1:]):
+            for i in range(len(perm)+1):
+                #nb str[0:1] works in both string and list contexts
+                yield perm[:i] + str[0:1] + perm[i:]
+
