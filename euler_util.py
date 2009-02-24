@@ -81,9 +81,10 @@ def is_pandigital(candidate):
         if not str(i) in digits: return False
     return True
 
-# permutations generator from Michael Davies
+# nice permutation generator from Michael Davies
 # http://code.activestate.com/recipes/252178/
 def permutations(str):
+    """Yield all permutations of a given list or string"""
     if len(str) <=1:
         yield str
     else:
