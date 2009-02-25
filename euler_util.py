@@ -14,7 +14,6 @@ def factorial(x):
         fac *= i
     return fac
 
-# simple number theory functions modified from http://www.4dsolutions.net
 def gcd(a,b):
    """Return greatest common divisor using Euclid's Algorithm."""
    while b:      
@@ -22,7 +21,7 @@ def gcd(a,b):
    return a
 
 def lcm(a,b):
-   """Return lowest common multiple."""
+   """Return least common multiple."""
    return (a*b)/gcd(a,b)
 
 def GCD(terms):
@@ -36,7 +35,7 @@ def LCM(terms):
 # quick prime sieve from literateprograms.org
 def sieve_of_eratosthenes(n):
     """Generate a list of the prime numbers [2, 3, ... m] where
-    m is the largest prime <= n."""
+    m is the largest prime <= n. Takes O(n) space."""
     n = n + 1
     sieve = range(n)
     sieve[:2] = [0, 0]
@@ -72,10 +71,15 @@ def divisors(number):
             divisors.append(number/i)
     return divisors
 
+def is_palindrome(candidate):
+    """Determine whether or not a number (or any string) is palindromic"""
+    digits = [digit for digit in str(candidate)]
+    return (digits == digits[::-1])
 
 def is_pandigital(candidate):
     """Determine whether or not a number with n digits contains all the
     digits from 1 to n"""
+    if candidate > 987654321: return False
     digits = [digit for digit in str(candidate)]
     for i in range(1, len(digits)+1):
         if not str(i) in digits: return False
