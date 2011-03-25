@@ -31,12 +31,13 @@ def main(argv=None):
 
     # import the function euler# and time its execution
     # if it does not exist, exit gracefully
-    function_name = "euler" + str(args[0])
+    file_name = "euler%03d" % int(args[0])
+    function_name = "euler%d" % int(args[0])
     try:
-        module = __import__(function_name)
+        module = __import__(file_name)
     except:
         print 'Could not import %s, has that problem been solved yet?'\
-                % function_name
+                % file_name
         raise
     invoke_function = getattr(module, function_name)
     if (callable(invoke_function)):
