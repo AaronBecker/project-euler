@@ -11,7 +11,7 @@ def cycles(x):
         x = x/10 + ones*e
         yield x
 
-primes = []
+primes = set([])
 template = re.compile("[1379]+")
 def cyclic_prime(x):
     if x > 9 and not template.match(str(x)):
@@ -20,7 +20,7 @@ def cyclic_prime(x):
 
 def euler35(upper_bound=1000000):
     global primes
-    primes = sieve(upper_bound)
+    primes = set(sieve(upper_bound))
     prime_count = sum(cyclic_prime(x) for x in primes)
     print 'There are %d circular primes under %d' % (prime_count, upper_bound)
     return prime_count
