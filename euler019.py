@@ -12,9 +12,9 @@ def initial_sundays_in_year(year):
 
 
 def euler19():
-    """How many Sundays fell on the first of the month during the twentieth
+    """http://projecteuler.net/index.php?section=problems&id=19
+    
+    How many Sundays fell on the first of the month during the twentieth
     century?"""
-    sundays = sum([initial_sundays_in_year(y) for y in range(1901, 2001)])
-    print "%d Sundays fell on the first in the 20th century" % sundays
-    return sundays
+    return sum([initial_sundays_in_year(y) for y in range(1901, 2001)])
 

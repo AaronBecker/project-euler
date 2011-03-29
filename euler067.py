@@ -104,5 +104,8 @@ ep67 = """\
 import euler017
 
 def euler67(triangle_string=ep67):
-    euler017.euler17(triangle_string)
+    """http://projecteuler.net/index.php?section=problems&id=67
+    
+    Using an efficient algorithm find the maximal sum in the triangle."""
+    return euler017.euler17(triangle_string)
 

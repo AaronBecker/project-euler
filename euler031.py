@@ -10,8 +10,8 @@ def change_count(target, total, coin, coins):
     return 0
 
 def euler31(target=200):
-    """How many different ways can 2 GBP be made using any number of coins?"""
-    ways = change_count(200, 0, 1, uk_coins)
-    print "There are %d ways to make %d p from change" % (ways, target)
-    return ways
+    """http://projecteuler.net/index.php?section=problems&id=31
+    
+    How many different ways can 2 GBP be made using any number of coins?"""
+    return change_count(200, 0, 1, uk_coins)
 

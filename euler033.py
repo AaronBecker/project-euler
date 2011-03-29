@@ -15,10 +15,10 @@ def can_cancel(num, denom):
 
 
 def euler33():
-    """Find the fractions with an unorthodox cancelling method."""
+    """http://projecteuler.net/index.php?section=problems&id=33
+    
+    Find the fractions with an unorthodox cancelling method."""
     fracs = [Fraction(num, denom) for num in range(10, 100) \
             for denom in range(10, 100) if can_cancel(num, denom)]
-    prod = reduce(lambda x, y: x*y, fracs)
-    print 'The product of the special fractions is %s' % prod
-    return prod.denominator
+    return reduce(lambda x, y: x*y, fracs).denominator
 

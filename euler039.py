@@ -1,7 +1,9 @@
 
 def euler39(upper_bound=1000):
-    """If p is the perimeter of a right angle triangle, {a, b, c}, 
-    which value, for p <= 1000, has the most solutions?"""
+    """http://projecteuler.net/index.php?section=problems&id=39
+
+    If p is the perimeter of a right angle triangle, {a, b, c}, which value,
+    for p <= 1000, has the most solutions?"""
     triples = {}
     max_length = 0
     max_perimeter = 0
@@ -19,7 +21,5 @@ def euler39(upper_bound=1000):
                     max_length = len(triples[p])
                     max_perimeter = p
                 k += 1
-    print 'The following is the longest list of triples:'
-    print list(triples[max_perimeter])
-    print 'Attained when p = %d' % max_perimeter
     return max_perimeter
+

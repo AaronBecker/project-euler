@@ -1,4 +1,5 @@
 
+import itertools
 from euler_util import is_pandigital
 
 def forms_pandigital(n):
@@ -9,9 +10,9 @@ def forms_pandigital(n):
         elif len(concat) > 9: return 0
 
 def euler38(upper_bound=100000):
-    """What is the largest 1 to 9 pandigital that can be formed by multiplying
-    a fixed number by 1, 2, 3, ... ?"""
-    biggest = max(forms_pandigital(n) for n in xrange(upper_bound))
-    print 'The target pandigital is %d' % biggest
-    return max
+    """http://projecteuler.net/index.php?section=problems&id=38
+    
+    What is the largest 1 to 9 pandigital that can be formed by multiplying a
+    fixed number by 1, 2, 3, ... ?"""
+    return max(forms_pandigital(n) for n in xrange(upper_bound))
 

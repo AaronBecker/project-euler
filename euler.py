@@ -3,6 +3,7 @@
 import sys
 import optparse
 import time
+import euler_util
 try:
     import psyco
     psyco.full()
@@ -41,9 +42,10 @@ def main(argv=None):
         raise
     invoke_function = getattr(module, function_name)
     if (callable(invoke_function)):
+        print euler_util.trim(invoke_function.__doc__)
         start = time.time()
         try:
-            invoke_function()
+            print invoke_function()
         except:
             print 'Error during %s: %s' % (function_name, sys.exc_info()[0])
             raise

@@ -103,10 +103,8 @@ pe13 = """\
 """
 
 def euler13(number_string=pe13):
-    """Find the first ten digits of the sum of one-hundred 
-    50-digit numbers."""
-    numbers = [int(num) for num in number_string.split()]
-    sum_str_prefix = str(sum(numbers))[0:10]
-    print "The first ten digits of the sum are %s." % sum_str_prefix
-    return
+    """http://projecteuler.net/index.php?section=problems&id=13
+    
+    Find the first ten digits of the sum of one-hundred 50-digit numbers."""
+    return str(sum(int(num) for num in number_string.split()))[0:10]
 

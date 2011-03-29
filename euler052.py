@@ -6,10 +6,10 @@ def same_digits(x):
             set(str(4*x)) == set(str(3*x))
 
 def euler52():
-    """Find the smallest positive integer, x, such that 2x, 3x, 4x, 5x, and 6x,
+    """http://projecteuler.net/index.php?section=problems&id=52
+    
+    Find the smallest positive integer, x, such that 2x, 3x, 4x, 5x, and 6x,
     contain the same digits in some order."""
     n = dropwhile(lambda x: not same_digits(x), count(1)).next()
-    print 'The smallest integer x, such that 2x, 3x, ..., 6x all have'\
-            'the same digits is %d' % n
     return n
 

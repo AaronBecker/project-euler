@@ -23,7 +23,9 @@ ep8 = """\
 """
 
 def euler8(digit_string=ep8):
-    """Find the greatest product of five consecutive digits in the given number."""
+    """http://projecteuler.net/index.php?section=problems&id=8
+    
+    Find the greatest product of five consecutive digits in the given number."""
     max_product = 1
     for i in xrange(len(digit_string)-5):
         product = int(digit_string[i]) *\
@@ -33,6 +35,5 @@ def euler8(digit_string=ep8):
                 int(digit_string[i+4])
         if max_product < product:
             max_product = product
-    print "The greatest product of 5 consecutive digits is %d\n" % max_product
     return max_product
 

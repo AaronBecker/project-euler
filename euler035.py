@@ -19,9 +19,11 @@ def cyclic_prime(x):
     return all(y in primes for y in cycles(x))
 
 def euler35(upper_bound=1000000):
+    """http://projecteuler.net/index.php?section=problems&id=35
+
+    Find the sum of all numbers less than one million, which are palindromic in
+    base 10 and base 2."""
     global primes
     primes = set(sieve(upper_bound))
-    prime_count = sum(cyclic_prime(x) for x in primes)
-    print 'There are %d circular primes under %d' % (prime_count, upper_bound)
-    return prime_count
+    return sum(cyclic_prime(x) for x in primes)
 

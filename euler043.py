@@ -11,11 +11,10 @@ def is_divisible(s):
             int(s[1:4]) % 2 == 0
 
 def euler43():
-    """Find the sum of all pandigital numbers with an unusual substring
+    """http://projecteuler.net/index.php?section=problems&id=43
+    
+    Find the sum of all pandigital numbers with an unusual substring
     divisibility property."""
-    divs = [int(''.join(t)) for t in permutations('1234567890') \
-            if is_divisible(''.join(t))]
-    print divs, sum(divs)
-    print 'The sum of the divisible pandigitals is %d' % sum(divs)
-    return sum(divs)
+    return sum(int(''.join(t)) for t in permutations('1234567890') \
+            if is_divisible(''.join(t)))
 

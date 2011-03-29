@@ -1,7 +1,9 @@
 from euler_util import is_palindrome
 
 def euler55():
-    """How many Lychrel numbers are there below ten-thousand?"""
+    """http://projecteuler.net/index.php?section=problems&id=55
+    
+    How many Lychrel numbers are there below ten-thousand?"""
     lychrel = []
     for n in range(10000):
         candidate = n
@@ -12,5 +14,4 @@ def euler55():
                 is_lychrel = False
                 break
         if is_lychrel: lychrel.append(n)
-    print 'Found %d lychrel numbers' % len(lychrel)
-    print lychrel
+    return len(lychrel)

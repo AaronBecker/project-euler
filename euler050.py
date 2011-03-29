@@ -1,8 +1,10 @@
 from euler_util import sieve_of_eratosthenes
 
 def euler50(upper_bound=1000000):
-    """Which prime, below one-million, can be written as the sum of the
-    most consecutive primes?"""
+    """http://projecteuler.net/index.php?section=problems&id=50
+    
+    Which prime, below one-million, can be written as the sum of the most
+    consecutive primes?"""
     primes = sieve_of_eratosthenes(upper_bound)
     prime_sums = [primes[0]] * len(primes)
     for i in range(len(primes)-1):
@@ -20,6 +22,5 @@ def euler50(upper_bound=1000000):
             if slice_sum in primes_set and end - start > current_candidate_length:
                 current_candidate = slice_sum
                 current_candidate_length = end - start
-    print '%d is the sum of %d consecutive primes' % (current_candidate, current_candidate_length)
     return current_candidate
 

@@ -11,12 +11,13 @@ def to_binary(x):
     return b
 
 def euler36(upper_bound=10 ** 6):
-    """Find the sum of all numbers, less than one million,
-    which are palindromic in base 10 and base 2."""
+    """http://projecteuler.net/index.php?section=problems&id=36
+    
+    Find the sum of all numbers, less than one million, which are palindromic
+    in base 10 and base 2."""
     p_sum = 0
     # note: we can skip even numbers since they're never binary palindromes
     for n in range(1, upper_bound, 2):
         if is_palindrome(n) and is_palindrome(to_binary(n)): p_sum += n
-    print 'The sum of all numbers under %d which are palindromic in both'\
-            ' decimal and binary is %d' % (upper_bound, p_sum)
     return p_sum
+

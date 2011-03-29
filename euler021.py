@@ -1,7 +1,9 @@
 from euler_util import divisors
 
 def euler21(upper_bound=10000):
-    """Evaluate the sum of all amicable pairs under 10000."""
+    """http://projecteuler.net/index.php?section=problems&id=21
+    
+    Evaluate the sum of all amicable pairs under 10000."""
     div_table = {}
     amicables = set()
     for i in xrange(1, upper_bound):
@@ -12,7 +14,5 @@ def euler21(upper_bound=10000):
         if div_table[div_table[i]] == i and div_table[i] != i:
             amicables.add(div_table[i])
             amicables.add(div_table[div_table[i]])
-    amicable_sum = sum(amicables)
-    print 'The sum of amicable pairs under %d is %d'\
-            % (upper_bound, amicable_sum)
-    return amicable_sum
+    return sum(amicables)
+

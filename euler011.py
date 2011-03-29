@@ -23,8 +23,10 @@ ep11 = """\
 """
 
 def euler11(grid_string=ep11, xdim=20, ydim=20):
-    """What is the greatest product of four numbers in any direction in
-    the grid (up, down, left, right, diagonal)?"""
+    """http://projecteuler.net/index.php?section=problems&id=11
+    
+    What is the greatest product of four numbers in any direction in the grid
+    (up, down, left, right, diagonal)?"""
     grid = [int(x) for x in grid_string.split(" ")]
 
     # define scan functions for looking at products
@@ -75,6 +77,5 @@ def euler11(grid_string=ep11, xdim=20, ydim=20):
         product = rdiag(i)
         if product > max_product:
             max_product = product
-    print "The maximum product is %d" % max_product
     return max_product
 

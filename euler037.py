@@ -10,11 +10,11 @@ def is_truncatable(n):
     return True;
 
 def euler37(upper_bound=1000000):
-    """Find the sum of all eleven primes that are both truncatable from left to
+    """http://projecteuler.net/index.php?section=problems&id=37
+    
+    Find the sum of all eleven primes that are both truncatable from left to
     right and right to left."""
     global primes
     primes = set(sieve(upper_bound))
-    trunc_primes = [n for n in primes if is_truncatable(n)]
-    print 'The sum of truncatable primes is %d' % sum(trunc_primes)
-    return sum(trunc_primes)
+    return sum(n for n in primes if is_truncatable(n))
 

@@ -6,13 +6,13 @@ def is_prime(x):
     return True
 
 def euler41():
-    """What is the largest n-digit pandigital prime?"""
+    """http://projecteuler.net/index.php?section=problems&id=41
+
+    What is the largest n-digit pandigital prime?"""
     primes = []
     # note: sum(1..8) % 3 == sum(1..9) % 3 == 0, so 7 digits is the max
     for perm in permutations("1234567"):
         if is_prime(int(perm)):
             primes.append(int(perm))
-    primes.sort()
-    print 'The largest pandigital prime is %d' % primes[-1]
-    return primes[-1]
+    return max(primes)
 

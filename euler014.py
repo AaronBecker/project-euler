@@ -17,11 +17,9 @@ def collatz(upper_bound):
         yield terms
 
 def euler14(upper_bound=1000000):
-    """Which starting number under one million produces the longest 
-    Collatz chain?"""
-    cseq = zip(collatz(upper_bound), range(1, upper_bound))
-    (max_terms, max_seed) =  max(cseq)
-    print "The longest Collatz chain under %d is %d, produced by %d." %\
-            (upper_bound, max_terms, max_seed)
-    return max_seed
+    """http://projecteuler.net/index.php?section=problems&id=14
+    
+    Which starting number under one million produces the longest Collatz chain?
+    """
+    return max(zip(collatz(upper_bound), range(1, upper_bound)))[1]
 

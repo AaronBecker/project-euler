@@ -1,7 +1,9 @@
 
 def euler17(upper_bound=1000):
-    """How many letters would be needed to write all the numbers in words
-    from 1 to 1000?"""
+    """http://projecteuler.net/index.php?section=problems&id=17
+    
+    How many letters would be needed to write all the numbers in words from 1
+    to 1000?"""
     digits = {
             1: 3,
             2: 3,
@@ -54,7 +56,5 @@ def euler17(upper_bound=1000):
         else:
             letter_sum += hundreds_sum
     letter_sum += unique_numbers[1000]
-    print "It would take %d letters to write the numbers from 1 to 1000\n" %\
-            (letter_sum)
     return letter_sum
 

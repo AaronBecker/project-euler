@@ -23,8 +23,9 @@ def triangle_index(row, n):
     return n + row * (row + 1) / 2
 
 def euler18(triangle_string=ep18):
-    """Find the maximum sum travelling from the top 
-    of the triangle to the base."""
+    """http://projecteuler.net/index.php?section=problems&id=18
+    
+    Find the maximum sum travelling from the top of the triangle to the base."""
     triangle = [int(x) for x in triangle_string.split()]
     rows = triangle_string.count('\n')
     best = {}
@@ -33,8 +34,7 @@ def euler18(triangle_string=ep18):
         best[(row,0)] = best[(row-1,0)] + triangle[triangle_index(row, 0)]
         best[(row,row)] = best[(row-1,row-1)] + triangle[triangle_index(row, row)]
         for i in range(1, row):
-            best[(row,i)] = triangle[triangle_index(row, i)] + max(best[(row-1,i-1)], best[(row-1,i)])
-    longest_path = max([best[(rows-1,i)] for i in range(0, rows-1)])
-    print 'The longest path from top to bottom is %d' % longest_path
-    return best
+            best[(row,i)] = triangle[triangle_index(row, i)] + \
+                    max(best[(row-1,i-1)], best[(row-1,i)])
+    return max([best[(rows-1,i)] for i in range(0, rows-1)])
 

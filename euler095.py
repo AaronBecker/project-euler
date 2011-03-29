@@ -12,14 +12,14 @@ def chain_length(n):
     return 0
 
 def euler95(upper_bound=10**6):
-    """Find the smallest member of the longest amicable
-    chain with no element exceeding one million."""
+    """http://projecteuler.net/index.php?section=problems&id=95
+    
+    Find the smallest member of the longest amicable chain with no element
+    exceeding one million."""
     global divisor_sums
     divisor_sums = [0]*upper_bound
     for i in xrange(1, upper_bound):
         for j in xrange(2*i, upper_bound, i):
             divisor_sums[j] += i
     chain_lengths = [chain_length(x) for x in xrange(upper_bound)]
-    longest_member = chain_lengths.index(max(chain_lengths))
-    print 'The longest amicable chain starts with %d' % longest_member
-
+    return chain_lengths.index(max(chain_lengths))
