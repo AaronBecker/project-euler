@@ -8,10 +8,10 @@ def forms_pandigital(n):
         if len(concat) == 9 and is_pandigital(int(concat)): return int(concat)
         elif len(concat) > 9: return 0
 
-def euler38():
+def euler38(upper_bound=100000):
     """What is the largest 1 to 9 pandigital that can be formed by multiplying
     a fixed number by 1, 2, 3, ... ?"""
-    biggest = max(forms_pandigital(n) for n in xrange(100000))
+    biggest = max(forms_pandigital(n) for n in xrange(upper_bound))
     print 'The target pandigital is %d' % biggest
     return max
 
