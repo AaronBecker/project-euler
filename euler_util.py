@@ -76,24 +76,31 @@ def sieve_of_eratosthenes(n):
     return [p for p in sieve if p]
 sieve = sieve_of_eratosthenes
 
+factor_primes = []
+factor_primes_max = 0
 def factor(number):
     """ Return a list of prime factors of n"""
+    global factor_primes, factor_primes_max
     factors = [1]
     sqrt = int(number ** 0.5) + 1
-    primes = sieve_of_eratosthenes(sqrt)
+    if sqrt > factor_primes_max:
+        factor_primes_max = max(sqrt, 2*factor_primes_max)
+        factor_primes = sieve_of_eratosthenes(factor_primes_max)
     index = 0 
-    while index < len(primes) and primes[index] <= sqrt:
-        prime = primes[index]
+    while index < len(factor_primes) and factor_primes[index] <= sqrt:
+        prime = factor_primes[index]
         while number % prime == 0:
             number /= prime
             factors.append(prime)
         index += 1
-    factors.append(number)
+    if number > 1:
+        factors.append(number)
     return factors
 
 def is_prime(number):
     """Simple divisibility test for primality"""
     if number < 3: return number == 2
+    if number % 2 == 0: return False
     for i in range(3, int(number ** 0.5) + 1, 2):
         if number % i == 0:
             return False
