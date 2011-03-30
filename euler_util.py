@@ -91,6 +91,14 @@ def factor(number):
     factors.append(number)
     return factors
 
+def is_prime(number):
+    """Simple divisibility test for primality"""
+    if number < 3: return number == 2
+    for i in range(3, int(number ** 0.5) + 1, 2):
+        if number % i == 0:
+            return False
+    return True
+
 def divisors(number):
     """Return a list of proper divisors of n"""
     divisors = [1]
