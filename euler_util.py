@@ -115,6 +115,17 @@ def divisors(number):
             divisors.append(number/i)
     return divisors
 
+def totient(n):
+    """Computes Euler's totient"""
+    factors = factor(n)
+    phi, last_f = 1, 1
+    for f in factors:
+        if f == last_f:
+            phi *= f
+        else:
+            phi, last_f = phi*(f - 1), f
+    return phi
+
 def is_palindrome(candidate):
     """Determine whether or not a number (or any string) is palindromic"""
     digits = [digit for digit in str(candidate)]
