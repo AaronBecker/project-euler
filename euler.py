@@ -51,7 +51,7 @@ def main(argv=None):
             raise
 
         end = time.time()
-        print '%s took %0.3f ms' % (function_name, (end-start)*1000.0)
+        print '%s took %0.0f ms' % (function_name, (end-start)*1000.0)
         return 0
     else:
         print '%s does not exist' % function_name
