@@ -1,4 +1,11 @@
-from euler_util import count_factors
+
+def count_factors(x):
+    """Count the factors (not necessarily prime) of x"""
+    factors = 2 # 1 and x
+    for i in xrange(2, int(x**0.5) + 1):
+        if x % i == 0:
+            factors += 2
+    return factors
 
 def euler12(target=500):
     """http://projecteuler.net/index.php?section=problems&id=12

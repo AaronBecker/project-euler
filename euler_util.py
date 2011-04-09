@@ -28,25 +28,17 @@ def trim(docstring):
     # Return a single string:
     return '\n'.join(trimmed)
 
-def count_factors(x):
-    """Count the factors (not necessarily prime) of x"""
-    factors = 2 # 1 and x
-    for i in xrange(2, int(x**0.5) + 1):
-        if x % i == 0:
-            factors += 2
-    return factors
-
 def factorial(x):
     """Compute x!"""
     fac = 1
-    for i in range(1, x+1):
+    for i in xrange(2, x+1):
         fac *= i
     return fac
 
 def gcd(a,b):
    """Return greatest common divisor using Euclid's Algorithm."""
    while b:      
-	a, b = b, a % b
+       a, b = b, a % b
    return a
 
 def lcm(a,b):
@@ -106,20 +98,14 @@ def expmod(x, n, m):
         x, n = (x**2) % m, n/2
     return result
 
-import random
-def probably_prime(n):
+def miller_rabin(n, tests):
     """Do a probabalistic primality test using the Miller-Rabin algorithm."""
-    if n < 3: return n == 2
-    if n == 3: return True
-    if n % 2 == 0: return False
     # First write n as 2**s * d, with d odd.
     s, d = 0, n-1
     while d % 2 == 0:
         s, d = s + 1, d/2
-    # This set of candidates is good up to 341,550,071,728,321
-    assert n < 341550071728321
-    for a in [2, 3, 5, 7, 11, 13, 17]:
-        if a >= n: return True
+    # Now perform the tests
+    for a in tests:
         x = expmod(a, d, n)
         if x == 1: continue
         for r in xrange(s-1):
@@ -128,13 +114,28 @@ def probably_prime(n):
         if x != n-1: return False
     return True
 
-def is_prime(number):
+def miller_rabin_candidates(n):
+    """Provide a set of tests that guarantees that miller-rabin will be
+    correct for numbers n or less."""
+    if n < 1373653: return [2, 3]
+    if n < 9080191: return [31, 73]
+    if n < 4759123141: return [2, 7, 61]
+    c = [2, 3, 5, 7, 11]
+    if n > 2152302898747: c.append(13)
+    if n > 3474749660383: c.append(17)
+    if n > 341550071728321: assert False
+    return c
+
+small_primes = sieve(200)
+def is_prime(n):
     """Simple divisibility test for primality"""
-    if number < 341550071728321: return probably_prime(number)
-    for i in range(3, int(number ** 0.5) + 1, 2):
-        if number % i == 0:
-            return False
-    return True
+    if n < 3: return n == 2
+    if n == 3: return True
+    if n % 2 == 0: return False
+    sqrt_n = int(n**0.5)
+    for p in small_primes:
+        if sqrt_n >= p and n % p == 0: return False
+    return miller_rabin(n, miller_rabin_candidates(n))
 
 def divisors(number):
     """Return a list of proper divisors of n"""
