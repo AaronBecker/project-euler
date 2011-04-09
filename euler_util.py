@@ -36,13 +36,13 @@ def factorial(x):
     return fac
 
 def gcd(a,b):
-   """Return greatest common divisor using Euclid's Algorithm."""
+   """Return the greatest common divisor of a and b."""
    while b:      
        a, b = b, a % b
    return a
 
 def lcm(a,b):
-   """Return least common multiple."""
+   """Return the least common multiple of a and b."""
    return (a*b)/gcd(a,b)
 
 def GCD(terms):
@@ -71,7 +71,7 @@ sieve = sieve_of_eratosthenes
 factor_primes = []
 factor_primes_max = 0
 def factor(number):
-    """ Return a list of prime factors of n"""
+    """Return a list of prime factors of n"""
     global factor_primes, factor_primes_max
     factors = [1]
     sqrt = int(number ** 0.5) + 1
@@ -90,7 +90,7 @@ def factor(number):
     return factors
 
 def expmod(x, n, m):
-    """ Compute x**n mod m"""
+    """Compute x**n mod m"""
     result = 1
     while n > 0:
         if n % 2 != 0:
@@ -128,7 +128,7 @@ def miller_rabin_candidates(n):
 
 small_primes = sieve(200)
 def is_prime(n):
-    """Simple divisibility test for primality"""
+    """Determine whether or not n is prime"""
     if n < 3: return n == 2
     if n == 3: return True
     if n % 2 == 0: return False
@@ -147,7 +147,7 @@ def divisors(number):
     return divisors
 
 def totient(n):
-    """Computes Euler's totient"""
+    """Compute Euler's totient"""
     factors = factor(n)
     phi, last_f = 1, 1
     for f in factors:
