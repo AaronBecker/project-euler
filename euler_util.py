@@ -130,7 +130,7 @@ def probably_prime(n):
 
 def is_prime(number):
     """Simple divisibility test for primality"""
-    if number < 341550071728321: return probably_prime(n)
+    if number < 341550071728321: return probably_prime(number)
     for i in range(3, int(number ** 0.5) + 1, 2):
         if number % i == 0:
             return False

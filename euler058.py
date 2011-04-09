@@ -1,5 +1,5 @@
 
-from euler_util import is_prime, probably_prime
+from euler_util import is_prime
 
 def euler58():
     """http://projecteuler.net/index.php?section=problems&id=58
@@ -9,8 +9,7 @@ def euler58():
     value, side, count = 1, 2, 0
     primes, total = 0, 0
     while True:
-        #primes, total = primes + is_prime(value), total + 1
-        primes, total = primes + probably_prime(value), total + 1
+        primes, total = primes + is_prime(value), total + 1
         if count == 0:
             if primes > 0 and float(primes)/total < 0.1:
                 return side - 1
