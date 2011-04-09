@@ -97,10 +97,40 @@ def factor(number):
         factors.append(number)
     return factors
 
+def expmod(x, n, m):
+    """ Compute x**n mod m"""
+    result = 1
+    while n > 0:
+        if n % 2 != 0:
+            result, n = (result*x) % m, n - 1
+        x, n = (x**2) % m, n/2
+    return result
+
+import random
+def probably_prime(n):
+    """Do a probabalistic primality test using the Miller-Rabin algorithm."""
+    if n < 3: return n == 2
+    if n == 3: return True
+    if n % 2 == 0: return False
+    # First write n as 2**s * d, with d odd.
+    s, d = 0, n-1
+    while d % 2 == 0:
+        s, d = s + 1, d/2
+    # This set of candidates is good up to 341,550,071,728,321
+    assert n < 341550071728321
+    for a in [2, 3, 5, 7, 11, 13, 17]:
+        if a >= n: return True
+        x = expmod(a, d, n)
+        if x == 1: continue
+        for r in xrange(s-1):
+            if x == n-1: break
+            x = (x**2) % n
+        if x != n-1: return False
+    return True
+
 def is_prime(number):
     """Simple divisibility test for primality"""
-    if number < 3: return number == 2
-    if number % 2 == 0: return False
+    if number < 341550071728321: return probably_prime(n)
     for i in range(3, int(number ** 0.5) + 1, 2):
         if number % i == 0:
             return False
