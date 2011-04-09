@@ -68,26 +68,22 @@ def sieve_of_eratosthenes(n):
     return [p for p in sieve if p]
 sieve = sieve_of_eratosthenes
 
-factor_primes = []
-factor_primes_max = 0
 def factor(number):
     """Return a list of prime factors of n"""
-    global factor_primes, factor_primes_max
-    factors = [1]
-    sqrt = int(number ** 0.5) + 1
-    if sqrt > factor_primes_max:
-        factor_primes_max = max(sqrt, 2*factor_primes_max)
-        factor_primes = sieve_of_eratosthenes(factor_primes_max)
-    index = 0 
-    while index < len(factor_primes) and factor_primes[index] <= sqrt:
-        prime = factor_primes[index]
+    factors, sqrt = [1], int(number ** 0.5) + 1
+    if sqrt > factor.primes_max:
+        factor.primes_max = max(sqrt, 2*factor.primes_max)
+        factor.primes = sieve(factor.primes_max)
+    for prime in factor.primes:
+        if prime > sqrt: break
         while number % prime == 0:
             number /= prime
             factors.append(prime)
-        index += 1
     if number > 1:
         factors.append(number)
     return factors
+factor.primes = []
+factor.primes_max = 0
 
 def expmod(x, n, m):
     """Compute x**n mod m"""
@@ -126,16 +122,18 @@ def miller_rabin_candidates(n):
     if n > 341550071728321: assert False
     return c
 
-small_primes = sieve(200)
 def is_prime(n):
     """Determine whether or not n is prime"""
+    if len(is_prime.small_primes) == 0:
+        is_prime.small_primes = sieve(200)
     if n < 3: return n == 2
     if n == 3: return True
     if n % 2 == 0: return False
     sqrt_n = int(n**0.5)
-    for p in small_primes:
+    for p in is_prime.small_primes:
         if sqrt_n >= p and n % p == 0: return False
     return miller_rabin(n, miller_rabin_candidates(n))
+is_prime.small_primes = []
 
 def divisors(number):
     """Return a list of proper divisors of n"""
