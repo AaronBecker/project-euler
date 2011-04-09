@@ -1,7 +1,7 @@
 
-import sys
 
 def trim(docstring):
+    import sys
     """Format a docstring for presentation."""
     # See http://www.python.org/dev/peps/pep-0257/
     if not docstring:
@@ -27,6 +27,10 @@ def trim(docstring):
         trimmed.pop(0)
     # Return a single string:
     return '\n'.join(trimmed)
+
+def product(numbers):
+    import operator
+    return reduce(operator.mul, numbers)
 
 def factorial(x):
     """Compute x!"""
