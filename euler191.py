@@ -22,6 +22,8 @@ def euler191(days=30):
 
     How many "prize" strings exist over a 30-day period?
     """
+    # Keep track of the number of strings ending in a, aa, or a safe character,
+    # and segregate by whether or not they already contain an 'L'.
     o, l, a, aa, al, aal = 1, 1, 1, 0, 0, 0
     for i in xrange(days-1):
         o, l, a, aa, al, aal = o+a+aa, l+o+a+aa+al+aal, o, a, l, al
