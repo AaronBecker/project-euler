@@ -1,25 +1,40 @@
 
+import heapq
 import itertools
 
 # note: uses the same input as 81
+#with open('test.txt') as f:
 with open('euler081_input.txt') as f:
     matrix = [map(int, line.strip().split(',')) for line in f.readlines()]
-    visited = set()
 
 def neighbors(x, y):
-    dimx, dimy = len(matrix[0]), len(matrix)
+    dimy, dimx = len(matrix[0]), len(matrix)
     xs = [x, x + 1]
     ys = [y, y - 1, y + 1]
-    def legal_neighbor(nx, ny):
+    def legal_neighbor((nx, ny)):
         global visited
         return 0 <= nx < dimx and \
-                0 <= ny < dimy and nx + ny - (x + y) == 1 and \
+                0 <= ny < dimy and \
+                abs(nx + ny - (x + y)) == 1 and \
                 (nx, ny) not in visited
     return filter(legal_neighbor, itertools.product(xs, ys))
 
+def shortest_path(start, goal):
+    global matrix, visited
+    visited, q = set(), []
+    heapq.heappush(q, (matrix[start[1]][start[0]], [start]))
+    while len(q) > 0:
+        cost, path = heapq.heappop(q)
+        if path[-1] == goal:
+            #return path
+            return cost
+        if path[-1] not in visited:
+            visited.add(path[-1])
+        for n in neighbors(path[-1][0], path[-1][1]):
+            if n not in visited:
+                new_path = path[:] + [n]
+                heapq.heappush(q, (cost + matrix[n[1]][n[0]], new_path))
 
-def shortest_path(path, goal):
-    pass
 
 def euler82():
     """http://projecteuler.net/index.php?section=problems&id=82
@@ -39,4 +54,9 @@ def euler82():
     As...'), a 31K text file containing a 80 by 80 matrix, from the left column
     to the right column.
     """
+    global matrix
+    path_lengths = [shortest_path((0, i), (len(matrix[0])-1, 0)) for i
+            in xrange(len(matrix))]
+    print path_lengths
+    return min(path_lengths)
 
