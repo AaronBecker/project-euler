@@ -17,8 +17,7 @@ def straight(hand):
     return len(set(ranks)) == 5 and ranks[-1] - ranks[0] == 4
 
 def flush(hand):
-    suits = set([suit(c) for c in hand])
-    return len(suits) == 1
+    return len(set([suit(c) for c in hand])) == 1
 
 def full_house(sets):
     return sets[0][0] == 3 and sets[1][0] == 2
