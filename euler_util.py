@@ -47,15 +47,15 @@ def gcd(a,b):
 
 def lcm(a,b):
    """Return the least common multiple of a and b."""
-   return (a*b)/gcd(a,b)
+   return (a * b) / gcd(a, b)
 
 def GCD(terms):
    """Return gcd of a list of numbers."""
-   return reduce(lambda a,b: gcd(a,b), terms)
+   return reduce(lambda a, b: gcd(a, b), terms)
 
 def LCM(terms):
    """Return lcm of a list of numbers."""   
-   return reduce(lambda a,b: lcm(a,b), terms)
+   return reduce(lambda a, b: lcm(a, b), terms)
 
 # quick prime sieve from literateprograms.org
 def sieve_of_eratosthenes(n):
@@ -76,7 +76,7 @@ def factor(number):
     """Return a list of prime factors of n"""
     factors, sqrt = [1], int(number ** 0.5) + 1
     if sqrt > factor.primes_max:
-        factor.primes_max = max(sqrt, 2*factor.primes_max)
+        factor.primes_max = max(sqrt, 2 * factor.primes_max)
         factor.primes = sieve(factor.primes_max)
     for prime in factor.primes:
         if prime > sqrt: break
@@ -94,8 +94,8 @@ def expmod(x, n, m):
     result = 1
     while n > 0:
         if n % 2 != 0:
-            result, n = (result*x) % m, n - 1
-        x, n = (x**2) % m, n/2
+            result, n = (result * x) % m, n - 1
+        x, n = (x ** 2) % m, n / 2
     return result
 
 def miller_rabin(n, tests):
@@ -103,15 +103,15 @@ def miller_rabin(n, tests):
     # First write n as 2**s * d, with d odd.
     s, d = 0, n-1
     while d % 2 == 0:
-        s, d = s + 1, d/2
+        s, d = s + 1, d / 2
     # Now perform the tests
     for a in tests:
         x = expmod(a, d, n)
         if x == 1: continue
-        for r in xrange(s-1):
-            if x == n-1: break
-            x = (x**2) % n
-        if x != n-1: return False
+        for r in xrange(s - 1):
+            if x == n - 1: break
+            x = (x ** 2) % n
+        if x != n - 1: return False
     return True
 
 def miller_rabin_candidates(n):
@@ -133,7 +133,7 @@ def is_prime(n):
     if n < 3: return n == 2
     if n == 3: return True
     if n % 2 == 0: return False
-    sqrt_n = int(n**0.5)
+    sqrt_n = int(n ** 0.5)
     for p in is_prime.small_primes:
         if sqrt_n >= p and n % p == 0: return False
     return miller_rabin(n, miller_rabin_candidates(n))
@@ -145,7 +145,7 @@ def divisors(number):
     for i in range(2, int(number ** 0.5) + 1):
         if number % i == 0:
             divisors.append(i)
-            divisors.append(number/i)
+            divisors.append(number / i)
     return divisors
 
 def totient(n):
@@ -156,7 +156,7 @@ def totient(n):
         if f == last_f:
             phi *= f
         else:
-            phi, last_f = phi*(f - 1), f
+            phi, last_f = phi * (f - 1), f
     return phi
 
 def is_palindrome(candidate):
@@ -169,19 +169,7 @@ def is_pandigital(candidate):
     digits from 1 to n"""
     if int(candidate) > 987654321: return False
     digits = [digit for digit in str(candidate)]
-    for i in range(1, len(digits)+1):
+    for i in range(1, len(digits) + 1):
         if not str(i) in digits: return False
     return True
-
-# nice permutation generator from Michael Davies
-# http://code.activestate.com/recipes/252178/
-def permutations(str):
-    """Yield all permutations of a given list or string"""
-    if len(str) <=1:
-        yield str
-    else:
-        for perm in permutations(str[1:]):
-            for i in range(len(perm)+1):
-                #nb str[0:1] works in both string and list contexts
-                yield perm[:i] + str[0:1] + perm[i:]
 
