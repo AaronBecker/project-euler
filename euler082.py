@@ -2,8 +2,9 @@
 import heapq
 import itertools
 
+matrix, visited = [], set()
+
 # note: uses the same input as 81
-#with open('test.txt') as f:
 with open('euler081_input.txt') as f:
     matrix = [map(int, line.strip().split(',')) for line in f.readlines()]
 
@@ -25,12 +26,10 @@ def shortest_path(start, goal):
     heapq.heappush(q, (matrix[start[1]][start[0]], [start]))
     while len(q) > 0:
         cost, path = heapq.heappop(q)
-        if path[-1] == goal:
-            #return path
-            return cost
-        if path[-1] not in visited:
-            visited.add(path[-1])
-        for n in neighbors(path[-1][0], path[-1][1]):
+        if path[-1][0] == len(matrix)-1: return cost
+        if path[-1] in visited: continue
+        visited.add(path[-1])
+        for n in neighbors(*path[-1]):
             if n not in visited:
                 new_path = path[:] + [n]
                 heapq.heappush(q, (cost + matrix[n[1]][n[0]], new_path))
@@ -55,8 +54,6 @@ def euler82():
     to the right column.
     """
     global matrix
-    path_lengths = [shortest_path((0, i), (len(matrix[0])-1, 0)) for i
-            in xrange(len(matrix))]
-    print path_lengths
-    return min(path_lengths)
+    return min([shortest_path((0, i), (len(matrix[0])-1, 0))
+            for i in xrange(len(matrix))])
 
