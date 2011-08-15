@@ -27,12 +27,12 @@ def euler8(digit_string=ep8):
     
     Find the greatest product of five consecutive digits in the given number."""
     max_product = 1
-    for i in xrange(len(digit_string)-5):
-        product = int(digit_string[i]) *\
-                int(digit_string[i+1]) *\
-                int(digit_string[i+2]) *\
-                int(digit_string[i+3]) *\
-                int(digit_string[i+4])
+    for i in xrange(len(digit_string) - 5):
+        product = int(digit_string[i]) * \
+                int(digit_string[i + 1]) * \
+                int(digit_string[i + 2]) * \
+                int(digit_string[i + 3]) * \
+                int(digit_string[i + 4])
         if max_product < product:
             max_product = product
     return max_product

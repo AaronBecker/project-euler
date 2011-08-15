@@ -9,6 +9,6 @@ def euler2(upper_bound=1000000):
     while f1 < upper_bound:
         if f1 % 2 == 0:
             even_sum = even_sum + f1
-        f1, f2 = f1+f2, f1
+        f1, f2 = f1 + f2, f1
     return even_sum
 

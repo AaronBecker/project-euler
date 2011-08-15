@@ -6,8 +6,7 @@ def euler7(n=10001):
     Find the 100001st prime."""
     # Find all primes less than some initial guess. If that doesn't provide enough
     # primes, try again with a bigger guess
-    guess = 1000000
-    primes = []
+    primes, guess = [], 1000000
     while len(primes) < n:
         primes = sieve_of_eratosthenes(guess)
         guess *= 2
