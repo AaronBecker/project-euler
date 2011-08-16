@@ -1,4 +1,4 @@
-from euler_util import factorial
+from math import factorial
 
 def euler20(x=100):
     """http://projecteuler.net/index.php?section=problems&id=20

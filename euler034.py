@@ -1,4 +1,4 @@
-from euler_util import factorial
+from math import factorial
 
 digit_factorials = [ factorial(0), factorial(1), factorial(2),
         factorial(3), factorial(4), factorial(5), factorial(6),

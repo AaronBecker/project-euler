@@ -32,13 +32,6 @@ def product(numbers):
     import operator
     return reduce(operator.mul, numbers)
 
-def factorial(x):
-    """Compute x!"""
-    fac = 1
-    for i in xrange(2, x+1):
-        fac *= i
-    return fac
-
 def gcd(a,b):
    """Return the greatest common divisor of a and b."""
    while b:      

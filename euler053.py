@@ -1,4 +1,4 @@
-from euler_util import factorial
+from math import factorial
 
 def euler53(upper_bound=10**6):
     """http://projecteuler.net/index.php?section=problems&id=53
