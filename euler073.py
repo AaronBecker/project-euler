@@ -16,7 +16,8 @@ def euler73(limit=12000):
     It can be seen that there are 3 fractions between 1/3 and 1/2.
 
     How many fractions lie between 1/3 and 1/2 in the sorted set of reduced
-    proper fractions for d <= 12,000?  """
+    proper fractions for d <= 12,000?
+    """
     return sum(1 for denom in xrange(3, limit + 1)
             for num in xrange(1 + int(denom / 3.0), 1 + int(denom / 2.0))
             if gcd(num, denom) == 1)
