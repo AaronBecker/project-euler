@@ -1,5 +1,5 @@
 
-from euler_util import factorial
+from math import factorial
 
 def euler15(n=20):
     """http://projecteuler.net/index.php?section=problems&id=15

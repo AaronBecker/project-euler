@@ -1,5 +1,5 @@
 
-from euler_util import factorial
+from math import factorial
 
 chains = {}
 facts = map(factorial, range(10))
