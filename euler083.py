@@ -6,12 +6,12 @@ from euler_util import shortest_path
 with open('euler081_input.txt') as f:
     matrix = [map(int, line.strip().split(',')) for line in f.readlines()]
 
+
 def neighbors((x, y)):
     dimy, dimx = len(matrix[0]), len(matrix)
-    xs = [x, x + 1]
+    xs = [x, x - 1, x + 1]
     ys = [y, y - 1, y + 1]
     def legal_neighbor((nx, ny)):
-        global visited
         return 0 <= nx < dimx and \
                 0 <= ny < dimy and \
                 abs(nx + ny - (x + y)) == 1
@@ -25,10 +25,10 @@ def weight((x, y)):
 
 def goal((x, y)):
     global matrix
-    return x == len(matrix)-1
+    return (x, y) == (len(matrix)-1, len(matrix[0])-1)
 
 
-def euler82():
+def euler83():
     """http://projecteuler.net/index.php?section=problems&id=82
 
     The minimal path sum in the 5 by 5 matrix below, by starting in any cell in
@@ -46,7 +46,5 @@ def euler82():
     As...'), a 31K text file containing a 80 by 80 matrix, from the left column
     to the right column.
     """
-    global matrix
-    return min([shortest_path((0, i), neighbors, weight, goal)[0]
-            for i in xrange(len(matrix))])
+    return shortest_path((0, 0), neighbors, weight, goal)[0]
 
