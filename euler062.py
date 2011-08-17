@@ -1,5 +1,6 @@
 
 import itertools
+from collections import Counter
 
 def euler62():
     """http://projecteuler.net/index.php?section=problems&id=62
@@ -11,15 +12,15 @@ def euler62():
     Find the smallest cube for which exactly five permutations of its digits
     are cube.
     """
-    sorted_cubes = {}
+    sorted_cubes = Counter()
     for i in itertools.count():
-        sc = int(''.join(sorted(str(i**3), reverse=True)))
-        if sc in sorted_cubes: sorted_cubes[sc] += 1
-        else: sorted_cubes[sc] = 1
+        # Note: reverse sorting ensures that we don't lose leading 0's.
+        sc = int(''.join(sorted(str(i ** 3), reverse=True)))
+        sorted_cubes[sc] += 1
         if sorted_cubes[sc] == 5:
             target = sc
             break
     for i in itertools.count():
-        if target == int(''.join(sorted(str(i**3), reverse=True))):
-            return i**3
+        if target == int(''.join(sorted(str(i ** 3), reverse=True))):
+            return i ** 3
         
