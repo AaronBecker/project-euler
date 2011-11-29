@@ -5,7 +5,6 @@ def mst_weight(adj_matrix):
     num_nodes, tree_nodes, tree_weight = len(adj_matrix), [0], 0
     while len(tree_nodes) < num_nodes:
         source, dest, weight = min_edge(adj_matrix, tree_nodes)
-        #print '(', source, dest, ') : ', weight, tree_nodes
         tree_nodes.append(dest)
         tree_weight += weight
         for i in xrange(num_nodes): adj_matrix[i][dest] = MAX_EDGE
@@ -40,7 +39,7 @@ with open('euler107_input.txt') as f:
     pe107 = [map(read_edge, line.strip().split(',')) for line in f.readlines()]
 
 def euler107(adj_matrix=pe107):
-    """http://projecteuler.net/index.php?section=problems&id=107
+    """http://projecteuler.net/problem=107
 
     Using network.txt (right click and 'Save Link/Target As...'), a 6K text
     file containing a network with forty vertices, and given in matrix form,
