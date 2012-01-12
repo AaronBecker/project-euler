@@ -194,15 +194,3 @@ def is_pandigital(candidate):
         if not str(i) in digits: return False
     return True
 
-@memoized
-def partition_number(n):
-    """Calculate the |n|th partition number using Euler's formula.
-    See http://mathworld.wolfram.com/PartitionFunctionP.html"""
-    if n < 0: return 0
-    elif n == 0: return 1
-    # Note: use range(n, 0, -1) instead of range(1, n + 1) in order to reduce
-    # the max recursion depth by computing the smaller contributions first.
-    return sum((-1)**(k + 1) *
-            (partition_number(n - k * (3 * k - 1) / 2) +
-                partition_number(n - k * (3 * k + 1) / 2))
-            for k in xrange(n, 0, -1))
