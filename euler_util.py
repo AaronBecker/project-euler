@@ -194,3 +194,23 @@ def is_pandigital(candidate):
         if not str(i) in digits: return False
     return True
 
+def shortest_path(start, neighbors, weight, goal):
+    """Find a minimum-cost path to a goal state using Dijkstra's algorithm.
+
+    Takes an initial state, a function mapping states to neighbor states, a
+    a function mapping states to weights, and a function that indicates whether
+    or not a state is a goal state.
+    """
+    import heapq
+    visited, q = set(), []
+    heapq.heappush(q, (weight(start), [start]))
+    while len(q) > 0:
+        cost, path = heapq.heappop(q)
+        if goal(path[-1]): return (cost, path)
+        if path[-1] in visited: continue
+        visited.add(path[-1])
+        for n in neighbors(path[-1]):
+            if n not in visited:
+                new_path = path[:] + [n]
+                heapq.heappush(q, (cost + weight(n), new_path))
+
