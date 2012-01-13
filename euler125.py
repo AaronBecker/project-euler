@@ -23,8 +23,7 @@ def euler125(upper_bound=10**8):
     answers = {}
     for i in xrange(1, len(square_sums)):
         for j in xrange(i-1):
-            if is_palindrome(square_sums[i] - square_sums[j]):
-                answers[square_sums[i] - square_sums[j]] = True
-    #results = sorted([n for n in answers.keys() if n < upper_bound])
-    #print results
-    return sum([n for n in answers.keys() if n < upper_bound])
+            candidate = square_sums[i] - square_sums[j]
+            if candidate < upper_bound and is_palindrome(candidate):
+                answers[candidate] = True
+    return sum(answers.keys())
