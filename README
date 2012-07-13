@@ -1,4 +1,4 @@
 This is a collection of solutions to mathematical programming problems from
-projecteuler.net, written in Python. Euler.py is the main driver program,
+projecteuler.net, written in Python. The main driver program is euler.py,
 which invokes and times the solutions, each of which is in its own file
 organized by problem number.
