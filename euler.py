@@ -4,11 +4,6 @@ import sys
 import optparse
 import time
 import euler_util
-try:
-    import psyco
-    psyco.full()
-except ImportError:
-    pass
 
 def main(argv=None):
     if argv is None:
