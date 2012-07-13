@@ -1,0 +1,9 @@
+#!/bin/bash
+
+python=$(which pypy)
+if [ -x "$python" ]; then
+    $python ./euler.py $*
+else
+    /usr/bin/env python ./euler.py $*
+fi
+
