@@ -13,16 +13,10 @@ def main(argv=None):
         formatter=optparse.TitledHelpFormatter(width=78),
         add_help_option=None)
 
-    # define options here:
-    #parser.add_option(
-    #    '-h', '--help', action='help',
-    #    help='Show this help message and exit.')
-
     settings, args = parser.parse_args(argv)
 
-    # check number of arguments, verify values, etc.:
     if not args:
-        print 'Specify the problem number to solve'
+        print 'usage: euler problem_number'
         return 1
 
     # import the function euler# and time its execution
@@ -31,26 +25,25 @@ def main(argv=None):
     function_name = "euler%d" % int(args[0])
     try:
         module = __import__(file_name)
-    except:
+    except ImportError:
         print 'Could not import %s, has that problem been solved yet?'\
                 % file_name
-        raise
-    invoke_function = getattr(module, function_name)
-    if (callable(invoke_function)):
-        print euler_util.trim(invoke_function.__doc__)
-        start = time.time()
-        try:
-            print invoke_function()
-        except:
-            print 'Error during %s: %s' % (function_name, sys.exc_info()[0])
-            raise
-
-        end = time.time()
-        print '%s took %0.0f ms' % (function_name, (end-start)*1000.0)
-        return 0
-    else:
+        return 1
+    target_function = getattr(module, function_name)
+    if not callable(target_function):
         print '%s does not exist' % function_name
         return 1
+
+    print euler_util.trim(target_function.__doc__)
+    start = time.time()
+    try:
+        print target_function()
+    except:
+        print 'Error during %s: %s' % (function_name, sys.exc_info()[0])
+        raise
+    end = time.time()
+    print '%s took %0.0f ms' % (function_name, (end-start)*1000.0)
+    return 0
 
 if __name__ == "__main__":
     status = main()
