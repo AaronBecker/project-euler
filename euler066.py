@@ -14,24 +14,16 @@ def partials(n):
 
 def pell(d):
     if d**0.5 == int(d**0.5): return 0
+    def test(num, denom): return num**2 - d * denom**2 == 1
     n, p, num, denom = 0, partials(d), int(d**0.5), 1
+    if test(num, denom): return num
     old_num, old_denom, num, denom = num, denom, p[0]*num+1, p[0]
-    print p
-    print old_num, old_denom
-    if old_num**2 - d * old_denom**2 == 1:
-        return old_num
-    print num, denom
-    if num**2 - d * denom**2 == 1:
-        return num
+    if test(num, denom): return num
     while True:
-        # formula appears to be wrong...check with d=7
         n, partial = n+1, p[(n+1) % len(p)]
-        num, denom = partial*num + old_num, partial*denom + old_denom
-        old_num, old_denom = num, denom
-        print num, denom
-        if num**2 - d * denom**2 == 1:
-            return num
-        if n > 100: return False
+        num, denom, old_num, old_denom = \
+                partial*num + old_num, partial*denom + old_denom, num, denom
+        if test(num, denom): return num
 
 def euler66(term=1000):
     """http://projecteuler.net/index.php?section=problems&id=66
@@ -60,8 +52,5 @@ def euler66(term=1000):
     Find the value of D <= 1000 in minimal solutions of x for which the
     largest value of x is obtained.
     """
-    print pell(7)
-    #for x in xrange(2, 8):
-    #    print pell(x)
-    #return sum(int(d) for d in str(nth_e_convergent(term).numerator))
+    return max((pell(d), d) for d in xrange(term+1))[1]
 
