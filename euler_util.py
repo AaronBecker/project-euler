@@ -1,4 +1,5 @@
 
+import functools
 
 def trim(docstring):
     import sys
