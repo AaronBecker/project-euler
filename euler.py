@@ -5,6 +5,7 @@ import optparse
 import time
 import euler_util
 
+
 def main(argv=None):
     if argv is None:
         argv = sys.argv[1:]
@@ -42,10 +43,9 @@ def main(argv=None):
         print 'Error during %s: %s' % (function_name, sys.exc_info()[0])
         raise
     end = time.time()
-    print '%s took %0.0f ms' % (function_name, (end-start)*1000.0)
+    print '%s took %0.0f ms' % (function_name, (end - start) * 1000.0)
     return 0
 
 if __name__ == "__main__":
     status = main()
     sys.exit(status)
-

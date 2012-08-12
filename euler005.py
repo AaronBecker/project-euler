@@ -1,5 +1,6 @@
 from euler_util import LCM
 
+
 def euler5(upper_bound=20):
     """http://projecteuler.net/problem=5
 
@@ -10,4 +11,3 @@ def euler5(upper_bound=20):
     numbers from 1 to 20?
     """
     return LCM(range(1, upper_bound + 1))
-

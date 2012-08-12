@@ -102,9 +102,9 @@ pe13 = """\
 53503534226472524250874054075591789781264330331690
 """
 
+
 def euler13(number_string=pe13):
-    """http://projecteuler.net/index.php?section=problems&id=13
-    
+    """http://projecteuler.net/problem=13
+
     Find the first ten digits of the sum of one-hundred 50-digit numbers."""
     return str(sum(int(num) for num in number_string.split()))[0:10]
-

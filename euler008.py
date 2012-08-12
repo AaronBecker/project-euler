@@ -1,7 +1,10 @@
 
+import sys
+from euler_util import product
+
 def euler8():
     """http://projecteuler.net/problem=8
-    
+
     Find the greatest product of five consecutive digits in the 1000-digit
     number.
     """
@@ -28,14 +31,10 @@ def euler8():
     05886116467109405077541002256983155200055935729725\
     71636269561882670428252483600823257530420752963450\
     """
-    max_product = 1
-    for i in xrange(len(digit_string) - 5):
-        product = int(digit_string[i]) * \
-                int(digit_string[i + 1]) * \
-                int(digit_string[i + 2]) * \
-                int(digit_string[i + 3]) * \
-                int(digit_string[i + 4])
-        if max_product < product:
-            max_product = product
+    digits = map(int, [c for c in digit_string if c.isdigit()])
+    max_product = -sys.maxint - 1
+    for i in xrange(len(digits) - 5):
+        p = product(digits[i:i + 5])
+        if max_product < p:
+            max_product = p
     return max_product
-

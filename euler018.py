@@ -17,24 +17,38 @@ ep18 = """\
 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23
 """
 
+
 def triangle_index(row, n):
     """In a linearized triangular array, gives the index of the nth element
     of a row."""
     return n + row * (row + 1) / 2
 
+
 def euler18(triangle_string=ep18):
-    """http://projecteuler.net/index.php?section=problems&id=18
-    
-    Find the maximum sum travelling from the top of the triangle to the base."""
+    """http://projecteuler.net/problem=18
+
+    By starting at the top of the triangle below and moving to adjacent numbers
+    on the row below, the maximum total from top to bottom is 23.
+
+    3
+    7 4
+    2 4 6
+    8 5 9 3
+
+    That is, 3 + 7 + 4 + 9 = 23.
+
+    Find the maximum sum travelling from the top of the triangle to the
+    base.
+    """
     triangle = [int(x) for x in triangle_string.split()]
     rows = triangle_string.count('\n')
     best = {}
-    best[(0,0)] = triangle[0]
+    best[(0, 0)] = triangle[0]
     for row in range(1, rows):
-        best[(row,0)] = best[(row-1,0)] + triangle[triangle_index(row, 0)]
-        best[(row,row)] = best[(row-1,row-1)] + triangle[triangle_index(row, row)]
+        best[(row, 0)] = best[(row - 1, 0)] + triangle[triangle_index(row, 0)]
+        best[(row, row)] = best[(row - 1, row - 1)] + \
+                triangle[triangle_index(row, row)]
         for i in range(1, row):
-            best[(row,i)] = triangle[triangle_index(row, i)] + \
-                    max(best[(row-1,i-1)], best[(row-1,i)])
-    return max([best[(rows-1,i)] for i in range(0, rows-1)])
-
+            best[(row, i)] = triangle[triangle_index(row, i)] + \
+                    max(best[(row - 1, i - 1)], best[(row - 1, i)])
+    return max([best[(rows - 1, i)] for i in range(0, rows - 1)])

@@ -1,9 +1,15 @@
 from euler_util import is_palindrome
 
+
 def euler55():
-    """http://projecteuler.net/index.php?section=problems&id=55
-    
-    How many Lychrel numbers are there below ten-thousand?"""
+    """http://projecteuler.net/problem=55
+
+    2520 is the smallest number that can be divided by each of the numbers from
+    1 to 10 without any remainder.
+
+    What is the smallest positive number that is evenly divisible by all of the
+    numbers from 1 to 20?
+    """
     lychrel = []
     for n in range(10000):
         candidate = n
@@ -13,5 +19,6 @@ def euler55():
             if is_palindrome(candidate):
                 is_lychrel = False
                 break
-        if is_lychrel: lychrel.append(n)
+        if is_lychrel:
+            lychrel.append(n)
     return len(lychrel)

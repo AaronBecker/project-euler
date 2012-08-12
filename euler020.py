@@ -1,8 +1,14 @@
 from math import factorial
 
-def euler20(x=100):
-    """http://projecteuler.net/index.php?section=problems&id=20
-    
-    Find the sum of digits in 100!"""    
-    return sum([int(c) for c in str(factorial(x))])
 
+def euler20(x=100):
+    """http://projecteuler.net/problem=20
+
+    n! means n  (n  1)  ...  3  2  1
+
+    For example, 10! = 10  9  ...  3  2  1 = 3628800, and the sum of the digits
+    in the number 10! is 3 + 6 + 2 + 8 + 8 + 0 + 0 = 27.
+
+    Find the sum of the digits in the number 100!
+    """
+    return sum([int(c) for c in str(factorial(x))])

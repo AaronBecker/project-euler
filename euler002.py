@@ -1,4 +1,5 @@
 
+
 def euler2(upper_bound=1000000):
     """http://projecteuler.net/problem=2
 
@@ -20,4 +21,3 @@ def euler2(upper_bound=1000000):
             even_sum = even_sum + f1
         f1, f2 = f1 + f2, f1
     return even_sum
-

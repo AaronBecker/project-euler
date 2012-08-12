@@ -1,4 +1,7 @@
 
+import sys
+from euler_util import product
+
 ep11 = """\
 08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08 \
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00 \
@@ -22,9 +25,10 @@ ep11 = """\
 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48\
 """
 
+
 def euler11(grid_string=ep11, xdim=20, ydim=20):
     """http://projecteuler.net/index.php?section=problems&id=11
-    
+
     What is the greatest product of four numbers in any direction in the grid
     (up, down, left, right, diagonal)?"""
     grid = [int(x) for x in grid_string.split(" ")]
@@ -33,49 +37,24 @@ def euler11(grid_string=ep11, xdim=20, ydim=20):
     def right(idx):
         if xdim - idx < 4:
             return 0
-        else:
-            return grid[idx] *\
-                    grid[idx+1] *\
-                    grid[idx+2] *\
-                    grid[idx+3]
+        return product(grid[idx:idx + 4])
+
     def down(idx):
         if ydim - idx / xdim < 4:
             return 0
-        else:
-            return grid[idx] *\
-                    grid[idx+1*xdim] *\
-                    grid[idx+2*xdim] *\
-                    grid[idx+3*xdim]
+        return product(grid[idx + n * xdim] for n in range(4))
+
     def ldiag(idx):
         if idx < 4 or ydim - idx / xdim < 4:
             return 0
-        else:
-            return grid[idx] *\
-                    (grid[idx+1*xdim - 1]) *\
-                    (grid[idx+2*xdim - 2]) *\
-                    (grid[idx+3*xdim - 3])
+        return product(grid[idx + n * xdim - n] for n in range(4))
+
     def rdiag(idx):
         if xdim - idx < 4 or ydim - idx / xdim < 4:
             return 0
-        else:
-            return grid[idx] *\
-                    (grid[idx+1*xdim + 1]) *\
-                    (grid[idx+2*xdim + 2]) *\
-                    (grid[idx+3*xdim + 3])
+        return product(grid[idx + n * xdim + n] for n in range(4))
 
-    max_product = 0
+    max_product = -sys.maxint - 1
     for i in xrange(len(grid)):
-        product = right(i)
-        if product > max_product:
-            max_product = product
-        product = down(i)
-        if product > max_product:
-            max_product = product               
-        product = ldiag(i)
-        if product > max_product:
-            max_product = product               
-        product = rdiag(i)
-        if product > max_product:
-            max_product = product
+        max_product = max([max_product, right(i), down(i), ldiag(i), rdiag(i)])
     return max_product
-
