@@ -1,6 +1,7 @@
 
 import functools
 
+
 def trim(docstring):
     import sys
     """Format a docstring for presentation."""
@@ -29,55 +30,65 @@ def trim(docstring):
     # Return a single string:
     return '\n'.join(trimmed)
 
+
 # Memoization decorator from the Python Decorator Library
 # (http://wiki.python.org/moin/PythonDecoratorLibrary)
 class memoized(object):
-   """Decorator that caches a function's return value each time it is called.
-   If called later with the same arguments, the cached value is returned, and
-   not re-evaluated.
-   """
-   def __init__(self, func):
-      self.func = func
-      self.cache = {}
-   def __call__(self, *args):
-      try:
-         return self.cache[args]
-      except KeyError:
-         value = self.func(*args)
-         self.cache[args] = value
-         return value
-      except TypeError:
-         # uncachable -- for instance, passing a list as an argument.
-         # Better to not cache than to blow up entirely.
-         return self.func(*args)
-   def __repr__(self):
-      """Return the function's docstring."""
-      return self.func.__doc__
-   def __get__(self, obj, objtype):
-      """Support instance methods."""
-      return functools.partial(self.__call__, obj)
+    """Decorator that caches a function's return value each time it is called.
+    If called later with the same arguments, the cached value is returned, and
+    not re-evaluated.
+    """
+    def __init__(self, func):
+        self.func = func
+        self.cache = {}
+
+    def __call__(self, *args):
+        try:
+            return self.cache[args]
+        except KeyError:
+            value = self.func(*args)
+            self.cache[args] = value
+            return value
+        except TypeError:
+            # uncachable -- for instance, passing a list as an argument.
+            # Better to not cache than to blow up entirely.
+            return self.func(*args)
+
+    def __repr__(self):
+        """Return the function's docstring."""
+        return self.func.__doc__
+
+    def __get__(self, obj, objtype):
+        """Support instance methods."""
+        return functools.partial(self.__call__, obj)
+
 
 def product(numbers):
     import operator
     return reduce(operator.mul, numbers)
 
-def gcd(a,b):
-   """Return the greatest common divisor of a and b."""
-   while b:      
-       a, b = b, a % b
-   return a
 
-def lcm(a,b):
-   """Return the least common multiple of a and b."""
-   return (a * b) / gcd(a, b)
+def gcd(a, b):
+    """Return the greatest common divisor of a and b."""
+    while b:
+        a, b = b, a % b
+    return a
+
+
+def lcm(a, b):
+    """Return the least common multiple of a and b."""
+    return (a * b) / gcd(a, b)
+
 
 def GCD(terms):
-   """Return gcd of a list of numbers."""
-   return reduce(lambda a, b: gcd(a, b), terms)
+    """Return gcd of a list of numbers."""
+    return reduce(lambda a, b: gcd(a, b), terms)
+
 
 def LCM(terms):
-   """Return lcm of a list of numbers."""   
-   return reduce(lambda a, b: lcm(a, b), terms)
+    """Return lcm of a list of numbers."""
+    return reduce(lambda a, b: lcm(a, b), terms)
+
 
 # quick prime sieve from literateprograms.org
 def sieve_of_eratosthenes(n):
@@ -93,6 +104,7 @@ def sieve_of_eratosthenes(n):
     # Filter out the composites, which have been replaced by 0's
     return [p for p in sieve if p]
 sieve = sieve_of_eratosthenes
+
 
 def factor(number):
     """Return a list of prime factors of n"""
@@ -111,6 +123,7 @@ def factor(number):
 factor.primes = []
 factor.primes_max = 0
 
+
 def expmod(x, n, m):
     """Compute x**n mod m"""
     result = 1
@@ -120,10 +133,11 @@ def expmod(x, n, m):
         x, n = (x ** 2) % m, n / 2
     return result
 
+
 def miller_rabin(n, tests):
     """Do a probabalistic primality test using the Miller-Rabin algorithm."""
     # First write n as 2**s * d, with d odd.
-    s, d = 0, n-1
+    s, d = 0, n - 1
     while d % 2 == 0:
         s, d = s + 1, d / 2
     # Now perform the tests
@@ -131,10 +145,12 @@ def miller_rabin(n, tests):
         x = expmod(a, d, n)
         if x == 1: continue
         for r in xrange(s - 1):
-            if x == n - 1: break
+            if x == n - 1:
+                break
             x = (x ** 2) % n
         if x != n - 1: return False
     return True
+
 
 def miller_rabin_candidates(n):
     """Provide a set of tests that guarantees that miller-rabin will be
@@ -147,6 +163,7 @@ def miller_rabin_candidates(n):
     if n > 3474749660383: c.append(17)
     if n > 341550071728321: assert False
     return c
+
 
 def is_prime(n):
     """Determine whether or not n is prime"""
@@ -161,6 +178,7 @@ def is_prime(n):
     return miller_rabin(n, miller_rabin_candidates(n))
 is_prime.small_primes = []
 
+
 def divisors(number):
     """Return a list of proper divisors of n"""
     divisors = [1]
@@ -169,6 +187,7 @@ def divisors(number):
             divisors.append(i)
             divisors.append(number / i)
     return divisors
+
 
 def totient(n):
     """Compute Euler's totient"""
@@ -181,10 +200,12 @@ def totient(n):
             phi, last_f = phi * (f - 1), f
     return phi
 
+
 def is_palindrome(candidate):
     """Determine whether or not a number (or any string) is palindromic"""
     digits = [digit for digit in str(candidate)]
     return (digits == digits[::-1])
+
 
 def is_pandigital(candidate):
     """Determine whether or not a number with n digits contains all the
@@ -194,6 +215,7 @@ def is_pandigital(candidate):
     for i in range(1, len(digits) + 1):
         if not str(i) in digits: return False
     return True
+
 
 def shortest_path(start, neighbors, weight, goal):
     """Find a minimum-cost path to a goal state using Dijkstra's algorithm.
@@ -214,4 +236,3 @@ def shortest_path(start, neighbors, weight, goal):
             if n not in visited:
                 new_path = path[:] + [n]
                 heapq.heappush(q, (cost + weight(n), new_path))
-
