@@ -47,23 +47,21 @@ def euler17(upper_bound=1000):
             90: 6,
             0: 0
     }
-    letter_sum = 0
-    for i in range(1, 10):
-        letter_sum += digits[i]
-    for i in range(10, 100):
+    letter_sum, hundreds_sum = 0, len("hundred")
+    for i in range(1, 1001):
         if i in unique_numbers:
             letter_sum += unique_numbers[i]
-        else:
+        elif i < 10:
+            letter_sum += digits[i]
+        elif i < 100:
             letter_sum += tens_modifiers[i - i % 10] + digits[i % 10]
-    hundreds_sum = len("hundred")
-    for i in range(100, 1000):
-        letter_sum += digits[i / 100]
-        tens = tens_modifiers[i % 100 - i % 10] + digits[i % 10]
-        if i % 100 in unique_numbers:
-            tens = unique_numbers[i % 100]
-        if tens != 0:
-            letter_sum += tens + hundreds_sum + 3
         else:
-            letter_sum += hundreds_sum
-    letter_sum += unique_numbers[1000]
+            letter_sum += digits[i / 100]
+            tens = tens_modifiers[i % 100 - i % 10] + digits[i % 10]
+            if i % 100 in unique_numbers:
+                tens = unique_numbers[i % 100]
+            if tens != 0:
+                letter_sum += tens + hundreds_sum + 3
+            else:
+                letter_sum += hundreds_sum
     return letter_sum

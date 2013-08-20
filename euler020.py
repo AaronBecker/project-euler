@@ -11,4 +11,4 @@ def euler20(x=100):
 
     Find the sum of the digits in the number 100!
     """
-    return sum([int(c) for c in str(factorial(x))])
+    return sum(int(d) for d in str(factorial(x)))

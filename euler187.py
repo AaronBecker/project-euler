@@ -18,5 +18,5 @@ def euler187(ub=10**8):
     big_primes = sieve(ub/2)
     total = 0
     for x in range(len(small_primes)):
-        total += bisect(big_primes, ub/primes[x]) - x
+        total += bisect(big_primes, ub/small_primes[x]) - x
     return total

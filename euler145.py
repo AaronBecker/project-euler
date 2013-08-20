@@ -6,9 +6,12 @@ def is_reversible(n):
     return set(str(digit_sum)) <= odd_digits
 
 def euler145(ub=10**9):
-    """http://projecteuler.net/index.php?section=problems&id=145
+    """http://projecteuler.net/problem=145
 
     How many reversible numbers are there below one-billion?"""
-    # Brute force, very slow
+    # FIXME: Brute force, very slow. A combinatoric approach
+    # would be much faster.
+    ub /= 10  # note that no length 9 solutions exist
+              # (nor do length 5, but it's not worth skipping them)
     return sum(is_reversible(n) for n in xrange(ub))
 

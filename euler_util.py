@@ -159,16 +159,9 @@ def miller_rabin_candidates(n):
 
 def is_prime(n):
     """Determine whether or not n is prime"""
-    if len(is_prime.small_primes) == 0:
-        is_prime.small_primes = sieve(200)
-    if n < 3: return n == 2
-    if n == 3: return True
-    if n % 2 == 0: return False
-    sqrt_n = int(n ** 0.5)
-    for p in is_prime.small_primes:
-        if sqrt_n >= p and n % p == 0: return False
+    if n < 2: return False
+    if n % 2 == 0 or n % 3 == 0: return False
     return miller_rabin(n, miller_rabin_candidates(n))
-is_prime.small_primes = []
 
 
 def divisors(number):

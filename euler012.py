@@ -1,4 +1,5 @@
 
+import itertools
 
 def count_factors(x):
     """Count the factors (not necessarily prime) of x"""
@@ -32,15 +33,11 @@ def euler12(target=500):
     What is the value of the first triangle number to have over five hundred
     divisors?
     """
-    n = target
-    last_factors = count_factors(n - 1)
-    while 1:
+    last_factors = count_factors(target - 1)
+    for n in itertools.count(target):
         factors = count_factors(n)
         if factors * last_factors - max(factors, last_factors) >= target:
             f = count_factors(n * (n - 1) / 2)
-            if f <= target:
-                n += 1
-                continue
+            if f <= target: continue
             return n * (n - 1) / 2
         last_factors = factors
-        n += 1

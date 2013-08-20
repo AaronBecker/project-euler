@@ -11,5 +11,6 @@ def euler206():
     1_2_3_4_5_6_7_8_9_0, where each "_" is a single digit."""
     # note: n^2 ends in 0, so the last _ is also a zero and n
     # also ends in zero.
-    for n in xrange(int(19293949596979899 ** 0.5), int(10203040506070809 ** 0.5), -1):
+    for n in xrange(int(19293949596979899 ** 0.5),
+                    int(10203040506070809 ** 0.5), -1):
         if check_template(n*n): return n*10

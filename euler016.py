@@ -7,4 +7,4 @@ def euler16(x=2 ** 1000):
 
     What is the sum of the digits of the number 21000?
     """
-    return sum([int(d) for d in str(x)])
+    return sum(int(d) for d in str(x))
