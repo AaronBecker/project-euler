@@ -43,16 +43,9 @@ class memoized(object):
         self.cache = {}
 
     def __call__(self, *args):
-        try:
-            return self.cache[args]
-        except KeyError:
-            value = self.func(*args)
-            self.cache[args] = value
-            return value
-        except TypeError:
-            # uncachable -- for instance, passing a list as an argument.
-            # Better to not cache than to blow up entirely.
-            return self.func(*args)
+        if not args in self.cache:
+            self.cache[args] = self.func(*args)
+        return self.cache[args]
 
     def __repr__(self):
         """Return the function's docstring."""

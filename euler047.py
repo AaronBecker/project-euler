@@ -1,12 +1,10 @@
 
 import itertools
-from euler_util import factor
+from euler_util import factor, memoized
 
-memo = {}
-def factors(n):
-    if n in memo: return memo[n]
-    memo[n] = len(set(factor(n))) - 1
-    return memo[n]
+@memoized
+def distinct_factors(n):
+    return len(set(factor(n))) - 1
 
 def euler47():
     """http://projecteuler.net/index.php?section=problems&id=47
@@ -14,6 +12,6 @@ def euler47():
     Find the first four consecutive integers to have four distinct prime
     factors."""
     for i in itertools.count():
-        if map(factors, [i+1, i+2, i+3, i+4]) == [4, 4, 4, 4]:
+        if map(distinct_factors, [i+1, i+2, i+3, i+4]) == [4, 4, 4, 4]:
             return i+1
 
