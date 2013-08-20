@@ -3,7 +3,7 @@ from fractions import Fraction
 from math import floor, ceil
 
 def euler71(limit=1000000):
-    """http://projecteuler.net/index.php?section=problems&id=71
+    """http://projecteuler.net/problem=71
 
     Consider the fraction, n/d, where n and d are positive integers. If nd and
     HCF(n,d)=1, it is called a reduced proper fraction.
@@ -20,11 +20,13 @@ def euler71(limit=1000000):
     ascending order of size, find the numerator of the fraction immediately to
     the left of 3/7.
     """
+    # Just look at the top end of the range, since the closest fractions will
+    # have large denominators.
     fracs = set()
-    for denom in xrange(2, limit + 1):
+    for denom in range(limit - 100, limit + 1):
         num_guess = denom * 3.0 / 7.0
         fracs.add(Fraction(int(floor(num_guess)), denom))
         fracs.add(Fraction(int(ceil(num_guess)), denom))
     fracs = sorted(fracs)
-    return fracs[fracs.index(Fraction(3, 7)) - 1]
-    
+    return fracs[fracs.index(Fraction(3, 7)) - 1].numerator
+

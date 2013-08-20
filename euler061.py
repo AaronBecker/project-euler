@@ -11,18 +11,23 @@ polygonals = [filter(limit, [n*(3*n - 2) for n in xrange(upper_bound)]),
         filter(limit, [n*(n + 1)/2 for n in xrange(upper_bound)])]
 
 
-def find_cycle(poly_lists, cycle):
+def find_partial_cycle(poly_lists, cycle):
     if len(poly_lists) == 0: return cycle
     polys, poly_lists = poly_lists[0], poly_lists[1:]
     for x in polys:
         if len(cycle) == 0 or cycle[-1] % 100 == x / 100:
-            new_cycle = find_cycle(poly_lists, cycle[:] + [x])
+            new_cycle = find_partial_cycle(poly_lists, cycle[:] + [x])
             if len(new_cycle) - len(cycle) == len(poly_lists) + 1 and \
                 (len(poly_lists) != 0 or \
                 new_cycle[0] / 100 == new_cycle[-1] % 100):
                         return new_cycle
     return cycle
-                
+
+def find_cycle(poly_lists):
+    cycle = find_partial_cycle(poly_lists, [])
+    if len(cycle) > 0 and cycle[-1] % 100 == cycle[0] / 100: return cycle
+    return []
+
 
 def euler61():
     """http://projecteuler.net/index.php?section=problems&id=61
@@ -50,7 +55,7 @@ def euler61():
     polygonal type: triangle, square, pentagonal, hexagonal, heptagonal, and
     octagonal, is represented by a different number in the set."""
     for perm in permutations(polygonals):
-        cycle = find_cycle(list(perm), [])
-        if len(cycle) == 6 and cycle[-1] % 100 == cycle[0] / 100:
+        cycle = find_cycle(list(perm))
+        if len(cycle) == 6:
             return sum(cycle)
- 
+

@@ -1,9 +1,10 @@
 from itertools import permutations
+from euler_util import is_prime
 
-def is_prime(x):
-    for i in xrange(2, int(x**0.5) + 1):
-        if x % i == 0: return False
-    return True
+#def is_prime(x):
+#    for i in xrange(2, int(x**0.5) + 1):
+#        if x % i == 0: return False
+#    return True
 
 def euler41():
     """http://projecteuler.net/index.php?section=problems&id=41

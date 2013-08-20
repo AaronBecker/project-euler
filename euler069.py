@@ -3,7 +3,7 @@ from euler_util import sieve
 
 primes = sieve(1000)
 def euler69(upper_bound=1000000):
-    """http://projecteuler.net/index.php?section=problems&id=69
+    """http://projecteuler.net/problem=69
 
     Find the value of n <= 1,000,000 for which n/φ(n) is a maximum."""
     # Note: here is the brute force approach:

@@ -31,13 +31,12 @@ def trim(docstring):
     return '\n'.join(trimmed)
 
 
-# Memoization decorator from the Python Decorator Library
-# (http://wiki.python.org/moin/PythonDecoratorLibrary)
 class memoized(object):
     """Decorator that caches a function's return value each time it is called.
     If called later with the same arguments, the cached value is returned, and
     not re-evaluated.
     """
+    # see http://wiki.python.org/moin/PythonDecoratorLibrary
     def __init__(self, func):
         self.func = func
         self.cache = {}
@@ -83,10 +82,10 @@ def LCM(terms):
     return reduce(lambda a, b: lcm(a, b), terms)
 
 
-# quick prime sieve from literateprograms.org
 def sieve_of_eratosthenes(n):
     """Generate a list of the prime numbers [2, 3, ... m] where
     m is the largest prime <= n. Takes O(n) space."""
+    # see literateprograms.org
     n = n + 1
     sieve = range(n)
     sieve[:2] = [0, 0]

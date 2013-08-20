@@ -2,10 +2,10 @@
 from euler_util import is_prime
 
 def euler58():
-    """http://projecteuler.net/index.php?section=problems&id=58
+    """http://projecteuler.net/problem=58
 
     Investigate the number of primes that lie on the diagonals of the spiral
-    grid.""" 
+    grid."""
     value, side, count = 1, 2, 0
     primes, total = 0, 0
     while True:

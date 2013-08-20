@@ -2,7 +2,7 @@
 from euler_util import totient
 
 def euler72(limit=1000000):
-    """http://projecteuler.net/index.php?section=problems&id=72
+    """http://projecteuler.net/problem=72
 
     Consider the fraction, n/d, where n and d are positive integers. If nd and
     HCF(n,d)=1, it is called a reduced proper fraction.
@@ -19,4 +19,4 @@ def euler72(limit=1000000):
     for d<=1,000,000?
     """
     return sum(totient(n) for n in xrange(2, limit + 1))
-    
+
