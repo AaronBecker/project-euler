@@ -15,9 +15,7 @@ def cycle_length(x):
 
 def euler26(upper_bound=1000):
     """http://projecteuler.net/index.php?section=problems&id=26
-    
+
     Find the value of d < 1000 for which 1/d contains the longest recurring
     cycle."""
-    length, i = max([(cycle_length(i), i) for i in range(2, upper_bound)])
-    return i
-
+    return max([(cycle_length(i), i) for i in range(2, upper_bound)])[1]

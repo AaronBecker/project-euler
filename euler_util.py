@@ -31,28 +31,20 @@ def trim(docstring):
     return '\n'.join(trimmed)
 
 
-# Memoization decorator from the Python Decorator Library
-# (http://wiki.python.org/moin/PythonDecoratorLibrary)
 class memoized(object):
     """Decorator that caches a function's return value each time it is called.
     If called later with the same arguments, the cached value is returned, and
     not re-evaluated.
     """
+    # see http://wiki.python.org/moin/PythonDecoratorLibrary
     def __init__(self, func):
         self.func = func
         self.cache = {}
 
     def __call__(self, *args):
-        try:
-            return self.cache[args]
-        except KeyError:
-            value = self.func(*args)
-            self.cache[args] = value
-            return value
-        except TypeError:
-            # uncachable -- for instance, passing a list as an argument.
-            # Better to not cache than to blow up entirely.
-            return self.func(*args)
+        if not args in self.cache:
+            self.cache[args] = self.func(*args)
+        return self.cache[args]
 
     def __repr__(self):
         """Return the function's docstring."""
@@ -90,10 +82,10 @@ def LCM(terms):
     return reduce(lambda a, b: lcm(a, b), terms)
 
 
-# quick prime sieve from literateprograms.org
 def sieve_of_eratosthenes(n):
     """Generate a list of the prime numbers [2, 3, ... m] where
     m is the largest prime <= n. Takes O(n) space."""
+    # see literateprograms.org
     n = n + 1
     sieve = range(n)
     sieve[:2] = [0, 0]
